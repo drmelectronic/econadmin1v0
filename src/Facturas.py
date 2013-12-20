@@ -375,11 +375,7 @@ class Nueva(gtk.Dialog):
         self.cursor.execute(sql)
         items = self.cursor.fetchall()
         for row in items:
-<<<<<<< HEAD
             self.model.append(row)
-=======
-          self.model.append(row)
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
 
     def guardar(self):
         #guardar cotizacion
@@ -416,11 +412,7 @@ class Nueva(gtk.Dialog):
         precio = Decimal('0.00').quantize(Decimal('0.00'))
         for row in self.model:
             precio += (Decimal(row[2])*Decimal(row[0])).quantize(Decimal('0.00'))
-<<<<<<< HEAD
         nombre = self.model[0][1][0:32]
-=======
-            nombre = self.model[0][1][0:32]
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
         guia = self.entry_guia.get_text()
         oc = self.entry_compra.get_text()
         valores = (fecha,empresa,moneda, pago,precio,nombre, guia,oc,self.id)
@@ -448,10 +440,6 @@ class Nueva(gtk.Dialog):
         self.but_fecha.set_date(fecha)
         self.entry_serie.set_text(str(serie))
         self.entry_numero.set_text(str(numero))
-<<<<<<< HEAD
-        
-=======
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
         self.cursor.execute("SELECT NUMERO FROM facturas WHERE SERIE=%s ORDER BY NUMERO DESC LIMIT 1"%(self.entry_serie.get_text()))
         try:
             corr = self.cursor.fetchone()[0]+1
@@ -468,10 +456,6 @@ class Nueva(gtk.Dialog):
         self.treeview.set_cursor(0)
 
     def leer(self,id):
-<<<<<<< HEAD
-=======
-        print 'LEER'
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
         self.id = id
         sql = "SELECT CANT,DESCRIPCION,PRECIO,ID FROM factitems WHERE FACTURA = %d"%id
         self.cursor.execute(sql)
@@ -486,16 +470,9 @@ class Nueva(gtk.Dialog):
         self.entry_numero.set_text(str(numero))
         self.cotiz = cotiz
         self.entry_compra.set_text(compra)
-<<<<<<< HEAD
-        self.entry_pago.set_id(pago)
-        self.combo_moneda.set_id(moneda)
-        self.entry_guia.set_text(guia)
-=======
-        print 'GUIA', guia
         self.entry_guia.set_text(guia)
         self.entry_pago.set_id(pago)
         self.combo_moneda.set_id(moneda)
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
         self.model.clear()
         for row in items:
             self.model.append(row)
@@ -551,10 +528,7 @@ class Cotizacion(gtk.Dialog):
     def __init__(self,cursor,id):
         gtk.Dialog.__init__(self)
         self.set_title("Facturas por Cotización")
-<<<<<<< HEAD
         self.impreso = False
-=======
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
         self.cursor = cursor
         self.cotiz = id
         columnas = ("FACTURA","ANULADO","PAGADO")
@@ -602,34 +576,6 @@ class Cotizacion(gtk.Dialog):
             self.model.append(row)
 
     def abrir(self,widget):
-<<<<<<< HEAD
-      nueva = Nueva(self.cursor)
-      if self.impreso:
-        nueva.copiar(self.model[0][4])
-      else:
-        nueva.leer(self.model[0][4])
-      if nueva.run() == gtk.RESPONSE_OK:
-        if self.impreso:
-          nueva.guardar()
-        else:
-          nueva.actualizar()
-      nueva.cerrar()
-
-    def on_cursor(self,widget):
-        path, column = self.treeview.get_cursor()
-        try:
-            self.impreso = self.model[path][3]
-        except:
-            self.but_nueva.label.set_text('_Nuevo')
-            self.but_nueva.label.set_use_underline(True)
-            self.but_imprimir.set_sensitive(False)
-        else:
-            if self.impreso:
-                self.but_nueva.label.set_text('_Nuevo')
-                self.but_nueva.label.set_use_underline(True)
-                self.but_imprimir.set_sensitive(False)
-            else:
-=======
         nueva = Nueva(self.cursor)
         if self.impreso:
             nueva.copiar(self.model[0][4])
@@ -656,7 +602,6 @@ class Cotizacion(gtk.Dialog):
                 self.but_nueva.label.set_use_underline(True)
                 self.but_imprimir.set_sensitive(False)
             else:
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
                 self.but_nueva.label.set_text('_Editar')
                 self.but_nueva.label.set_use_underline(True)
                 self.but_imprimir.set_sensitive(True)
@@ -672,23 +617,6 @@ class Cotizacion(gtk.Dialog):
         fact.imprimir()
 
     def guardar(self):
-<<<<<<< HEAD
-      i = 0
-      b = True
-      for row in self.model:
-        sql = "UPDATE facturas SET ANULADO=%d, PAGADO=%d WHERE ID=%d"%(row[1],row[2],row[4])
-        self.cursor.execute(sql)
-        if not row[1]:
-          i += 1
-          id = row[4]
-          b = b and row[2]
-      if i>0:
-        sql = "UPDATE cotizaciones SET FACTURA=%d, PAGADO=%d WHERE ID=%d"%(id,b,self.cotiz)
-        print sql
-        self.cursor.execute(sql)
-
-
-=======
         i = 0
         b = True
         for row in self.model:
@@ -702,7 +630,6 @@ class Cotizacion(gtk.Dialog):
             sql = "UPDATE cotizaciones SET FACTURA=%d, PAGADO=%d WHERE ID=%d"%(id,b,self.cotiz)
             print sql
             self.cursor.execute(sql)
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
 
     def cerrar(self):
         self.destroy()
