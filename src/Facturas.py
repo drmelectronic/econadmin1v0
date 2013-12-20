@@ -266,10 +266,7 @@ class Ventana(gtk.Window):
 class Nueva(gtk.Dialog):
     def __init__(self,cursor):
         gtk.Dialog.__init__(self)
-<<<<<<< HEAD
         self.impreso = False
-=======
->>>>>>> 3ca8b2f8a2e7bd381b2b31bdf5f88bc9efcd0efc
         self.cursor = cursor
         self.set_title("Nueva Factura")
         tabla_datos = gtk.Table(3,5,False)
