@@ -227,7 +227,11 @@ class Ventana(gtk.Window):
 	  igv = Decimal('0.18')
 	  sql = "SELECT SUM(IF(facturas.MONEDA=2,facturas.PRECIO*cambio.VALOR,facturas.PRECIO)) AS SOLES FROM facturas JOIN cambio ON cambio.DIA=facturas.FECHA WHERE facturas.FECHA LIKE '%s' AND facturas.ANULADO=0"%(periodo+'-%')
 	  self.cursor.execute(sql)
-	  ventas = int(self.cursor.fetchone()[0])
+	  v = self.cursor.fetchone()
+	  if v[0] is None:
+	  	ventas = 0
+	  else:
+	  	ventas = int(v[0])
 	  sql = """SELECT  f.FECHA, CONCAT(f.SERIE,'-',f.NUMERO) AS DOC,e.COMERCIAL,e.RUC,
 IF(f.MONEDA=1,f.PRECIO,f.PRECIO*c.VALOR) AS NETO,
 IF(f.MONEDA=1,f.PRECIO*0.18,f.PRECIO*0.18*c.VALOR) AS IGV,

@@ -330,7 +330,7 @@ class Guias:
 		pdf.drawString(90+margen[0],830-177-margen[1],str(ruc))
 		pdf.drawString(160+margen[0],830-177-margen[1],compra)
 		pdf.drawString(275+margen[0],830-177-margen[1],str(fecha))
-		pdf.drawString(97+margen[0],830-187-margen[1],'Jr. Algarrobos 543 Urb. Los Jardines - S.M.P.')
+		pdf.drawString(97+margen[0],830-187-margen[1],'Ca Tritón Mz 183 Lt 12 - Urb SMP - Los Olivos')
 		pdf.drawString(97+margen[0],830-197-margen[1],lugar)
 
 		pdf.drawString(385+margen[0],830-157-margen[1],nombre)
