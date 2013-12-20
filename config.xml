@@ -9,11 +9,11 @@
 -->
 
 <root>
-	<host>localhost</host>
+	<host>192.168.0.222</host>
 	<user>root</user>
 	<passwd>spedatha</passwd>
 	<db>econainERP</db>
 	<charset>utf8</charset>
 	<init_command>set names utf8</init_command>
-	<www>localhost</www>
+	<www>192.168.0.222</www>
 </root>
