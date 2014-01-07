@@ -12,8 +12,7 @@ import inspect
 from decimal import Decimal
 import threading
 from reportlab.pdfgen import canvas
-import pygst
-import sys, gst, gobject
+import sys, gobject
 import os
 import Proveedores
 import pynotify
