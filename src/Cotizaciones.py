@@ -246,10 +246,10 @@ class Ventana(gtk.Window):
       oc = nueva.entry_cod.get_text()
       file = nueva.entry_file.get_text()
       ext = file.split('.')[-1]
-      comm = """mv '%s' '/home/econain/EconAdmin/ordenes/%d.%s'"""%(file,self.model[path][5],ext)
+      comm = """mv '%s' '~/EconAdmin/ordenes/%d.%s'"""%(file,self.model[path][5],ext)
       command = os.popen(comm)
       read = command.read()
-      file = '/home/econain/EconAdmin/ordenes/%d.%s'%(self.model[path][5],ext)
+      file = '~/EconAdmin/ordenes/%d.%s'%(self.model[path][5],ext)
       sql = "UPDATE cotizaciones SET OC='%s',OCFILE='%s' WHERE ID=%d"%(oc,file,self.model[path][5])
       self.cursor.execute(sql)
     nueva.cerrar()
@@ -269,7 +269,7 @@ class Ventana(gtk.Window):
     ateid,ccid,ccoid,nombre,corr = self.cursor.fetchone()	
     corr = corr[2:]
     name = corr
-    operation.set_export_filename('/home/econain/EconAdmin/cotizaciones/'+corr+'.pdf')
+    operation.set_export_filename('~/EconAdmin/cotizaciones/'+corr+'.pdf')
     self.www_frame.print_full(operation,action)
     ventas_id = 2
     to = self.get_mails(ateid)
@@ -282,7 +282,7 @@ class Ventana(gtk.Window):
     else:
       body = 'Saludos cordiales,\nLe hacemos entrega de nuestra cotización por <b>%s</b>.\nAtte'%nombre
     path = os.getcwd()
-    attach = ('/home/econain/EconAdmin/cotizaciones/'+corr+'.pdf')
+    attach = ('~/EconAdmin/cotizaciones/'+corr+'.pdf')
     comm = """thunderbird -compose "to='%s',cc='%s,%s',bcc='webmaster@econain.com',subject='%s',body='%s',attachment='%s',preselectid='id%d'" """%(to,cc,cco,subject,body,attach,ventas_id)
     command = os.popen(comm)
     if enviado:
